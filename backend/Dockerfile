@@ -1,29 +1,32 @@
-# Use an official Node runtime as a parent image
-FROM node:14 AS build
+# Custom Dockerfile for Backend API
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+# Step 1: Use Node 14 as the base image for building the app
+FROM node:14 AS leena-builder
 
-# Copy the package.json and package-lock.json files to the container
+# Step 2: Set the working directory inside the container
+WORKDIR /leena-app
+
+# Step 3: Copy package files and install dependencies
 COPY package*.json ./
-
-# Install application dependencies
 RUN npm install
 
-# Copy the rest of the application code to the container
+# Step 4: Copy the entire backend source code into the container
 COPY . .
 
-#Add multi-stage build
+# Step 5: Use a lightweight image for the final container (multi-stage)
 FROM alpine:3.16.7
 
-WORKDIR /app
+# Set working directory in the final stage
+WORKDIR /leena-backend
 
-RUN apk update && apk add --update nodejs
+# Install Node.js runtime on Alpine
+RUN apk update && apk add --no-cache nodejs npm
 
-COPY --from=build /usr/src/app /app
+# Copy the built app from the builder stage
+COPY --from=leena-builder /leena-app /leena-backend
 
-# Expose the port the app runs on
+# Expose the backend port (adjust if your server runs on a different one)
 EXPOSE 5000
 
-# Define the command to run your app
+# Start the backend server
 CMD ["node", "server.js"]

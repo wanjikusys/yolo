@@ -10,37 +10,35 @@ version: "3.8"
 
 services:
 
-  #Builds the frontend Docker image and creates the frontend microservice
-  brian-yolo-client:
-    image: brianbwire/brian-yolo-client:v1.0.0
+
+  leena-yolo-client:
+    image: shikul/leena-yolo-client:v1.0.0  
     build: ./client
-    container_name: brian-yolo-client
+    container_name: leena-yolo-client
     stdin_open: true
     tty: true
     ports:
       - "3000:3000"
     depends_on: 
-      - brian-yolo-backend
+      - leena-yolo-backend
     networks:
       - app-net
 
-  #Builds the backend Docker image and creates the backend microservice
-  brian-yolo-backend:
-    image: brianbwire/brian-yolo-backend:v1.0.0
+  leena-yolo-backend:
+    image: shikul/leena-yolo-backend:v1.0.0  
     build: ./backend
-    container_name: brian-yolo-backend
+    container_name: leena-yolo-backend
     stdin_open: true
     tty: true
     restart: always
     ports:
       - "5000:5000"
     depends_on: 
-      - app-ip-mongo
+      - leena-ip-mongo
     networks:
       - app-net
 
-  #Creates the database microservice
-  app-ip-mongo:
+  leena-ip-mongo:
     image: mongo
     container_name: app-mongo
     ports:
@@ -51,6 +49,8 @@ services:
       - type: volume
         source: app-mongo-data
         target: /data/db
+
+
 
 #Creates the network infrastructure necessary for the containers to communicate with each other
 networks:
