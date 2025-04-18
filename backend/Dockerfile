@@ -25,7 +25,7 @@ RUN apk update && apk add --no-cache nodejs npm
 # Copy the built app from the builder stage
 COPY --from=leena-builder /leena-app /leena-backend
 
-# Expose the backend port (adjust if your server runs on a different one)
+# Expose the backend port
 EXPOSE 5000
 
 CMD ["node", "server.js"]
