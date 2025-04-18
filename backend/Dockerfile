@@ -13,7 +13,7 @@ RUN npm install
 # Step 4: Copy the entire backend source code into the container
 COPY . .
 
-# Step 5: Use a lightweight image for the final container (multi-stage)
+# Step 5: Use a lightweight image for the final container
 FROM alpine:3.16.7
 
 # Set working directory in the final stage
