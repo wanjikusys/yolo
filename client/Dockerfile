@@ -19,7 +19,7 @@ FROM alpine:3.16.7
 # Step 6: Set the working directory for the runtime container
 WORKDIR /leena-app-runtime
 
-# Step 7: Install Node and NPM (no-cache to keep image size small)
+# Step 7: Install Node and NPM 
 RUN apk update && apk add --no-cache nodejs npm
 
 # Step 8: Copy built app from the previous build stage
