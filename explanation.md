@@ -41,7 +41,9 @@ Used Git to track the progress of this project from setup to deployment.
   - `docker-compose.yml`
   - `.gitignore`
   - `README.md`
+## 6. DockerHub Image Screenshot
 
+![DockerHub Image](./Leena -ip2.png)
 All these steps are visible in the commit history of the repo. This helped me keep track of what was done and troubleshoot easily.
 
 Finally, pushed my code to GitHub:  
