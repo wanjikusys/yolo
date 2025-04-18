@@ -28,5 +28,4 @@ COPY --from=leena-builder /leena-app /leena-backend
 # Expose the backend port (adjust if your server runs on a different one)
 EXPOSE 5000
 
-# Start the backend server
 CMD ["node", "server.js"]
