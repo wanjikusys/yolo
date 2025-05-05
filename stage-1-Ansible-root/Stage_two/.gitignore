@@ -1,0 +1,29 @@
+# Node.js
+node_modules/
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Docker
+*.log
+*.pid
+docker-compose.override.yml
+
+# Vagrant
+.vagrant/
+*.box
+
+# Ansible
+*.retry
+
+# Terraform (optional if not used)
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+
+# OS
+.DS_Store
+Thumbs.db

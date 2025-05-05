@@ -2,7 +2,7 @@
 - name: Start Backend container
   docker_container:
         name: "{{ backend_container_name }}"
-        image: leena-backend-image:latest
+        image: leena-backend-image
         state: started
         restart_policy: always
         networks:

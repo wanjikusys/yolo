@@ -1,0 +1,35 @@
+- name: Create Docker network
+  docker_network:
+    name: app-net
+    state: present
+
+- name: Start MongoDB
+  docker_container:
+    name: mongo
+    image: mongo
+    networks:
+      - name: app-net
+    state: started
+    restart_policy: always
+
+- name: Start Backend
+  docker_container:
+    name: yolo-backend
+    image: leena-yolo-backend
+    networks:
+      - name: app-net
+    ports:
+      - "5000:5000"
+    state: started
+    restart_policy: always
+
+- name: Start Frontend
+  docker_container:
+    name: yolo-frontend
+    image: leena-yolo-client
+    networks:
+      - name: app-net
+    ports:
+      - "8080:8080"
+    state: started
+    restart_policy: always
