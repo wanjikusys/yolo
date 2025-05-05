@@ -1,38 +1,14 @@
 ---
 # tasks file for roles/docker_install
-    - name: Install Docker on Ubuntu
-      block:
-       - name: Install required system packages
-         apt:
-          name: 
-            - apt-transport-https
-            - ca-certificates
-            - curl
-            - gnupg
-            - lsb-release
-          state: present
-          update_cache: yes
 
-    - name: Add Docker GPG apt Key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
+- name: Check if Docker is already installed
+  command: docker --version
+  register: docker_check
+  ignore_errors: yes
 
-    - name: Add Docker APT repository
-      apt_repository:
-        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-        state: present
-        filename: docker
-
-    - name: Update APT and install Docker
-      apt:
-        name: docker-ce
-        state: present
-        update_cache: yes
-
-    - name: Start and enable Docker service
-      service:
-        name: docker
-        state: started
-        enabled: yes
-      tags: docker
+- name: Install Docker only if not present
+  apt:
+    name: docker.io
+    state: present
+    update_cache: yes
+  when: docker_check.rc != 0
