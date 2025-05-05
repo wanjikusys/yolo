@@ -1,0 +1,11 @@
+---
+- name: Start Backend container
+  docker_container:
+        name: "{{ backend_container_name }}"
+        image: leena-backend-image:latest
+        state: started
+        restart_policy: always
+        networks:
+          - app-net
+        ports:
+          - "5000:5000"

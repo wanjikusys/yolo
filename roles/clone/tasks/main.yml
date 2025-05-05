@@ -1,0 +1,7 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for clone
+  - name: Clone application code from GitHub
+    git:
+        repo: 'https://github.com/wanjikusys/yolo.git'
+        dest: /home/vagrant/Desktop/ip3/yolo

@@ -1,0 +1,14 @@
+---
+- name: Create Docker network
+  docker_network:
+        name: app-net
+        state: present
+
+- name: Start MongoDB container
+  docker_container:
+        name: "{{ mongodb_container_name }}"
+        image: mongo:latest
+        state: started
+        restart_policy: always
+        networks:
+          app-net: {}

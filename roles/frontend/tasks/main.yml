@@ -1,0 +1,11 @@
+---
+ - name: Start Frontend container
+   docker_container:
+        name: "{{ frontend_container_name }}"
+        image: leena-yolo-client
+        state: started
+        restart_policy: always
+        networks:
+          - app-net
+        ports:
+          - "8080:8080"
