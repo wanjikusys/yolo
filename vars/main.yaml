@@ -1,0 +1,6 @@
+# group_vars/all.yml
+
+app_repo: "https://github.com/wanjikusys/yolo"
+frontend_port: 3000
+backend_port: 5000
+mongo_image: "mongo:5.0"
