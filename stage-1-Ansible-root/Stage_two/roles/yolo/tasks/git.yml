@@ -1,5 +1,0 @@
-- name: Clone the YOLO Git repo
-  git:
-     repo: 'https://github.com/wanjikusys/yolo.git'
-     dest: /home/Desktop/ip3/yolo
-     force: yes
