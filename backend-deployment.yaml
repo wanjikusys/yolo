@@ -1,44 +1,33 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: backend-deployment
-  labels:
-    app: backend
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: backend
-  template:
-    metadata:
-      labels:
-        app: backend
-    spec:
-      containers:
-        - name: backend
-          image: brianbwire/brian-yolo-backend:v1.0.0
-          command: ["npm", "start"] 
-          ports:
-            - containerPort: 5000
-          resources:
-            limits:
-              memory: "256Mi"
-              cpu: "500m"
-            requests:
-              memory: "128Mi"
-              cpu: "250m"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend-service
-spec:
-  type: LoadBalancer
-  selector:
-    app: backend
-  ports:
-    - protocol: TCP
-      port: 5000
-      targetPort: 5000
-      nodePort: 30100
-  
+- name: "🧰 BACKEND | Create Docker network if it doesn't exist"
+  docker_network:
+    name: "app-net"
+    driver: bridge
+    state: present
+  tags: backend
+
+- name: "🐳 BACKEND | Build the backend Docker image"
+  docker_image:
+    name: leena-yolo-backend
+    tag: v1.0.0
+    path: "/Desktop/ip3/yolo/backend"
+    source: build
+  tags: backend
+
+- name: "🐳 BACKEND | Run the backend container"
+  docker_container:
+    name: leena-yolo-backend
+    image: leena-yolo-backend:v1.0.0
+    state: started
+    restart_policy: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - "/Desktop/ip3/yolo/backend:/app"
+    working_dir: /app
+    networks:
+      - name: "app-net"
+    depends_on:
+      - app-mongo
+    env:
+      NODE_ENV: development
+  tags: backend

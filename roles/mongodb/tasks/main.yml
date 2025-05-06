@@ -1,14 +1,16 @@
 ---
-- name: Create Docker network
-  docker_network:
-        name: app-net
-        state: present
+- name: Pull image from repository
+  docker_image:
+    name: shikul/leena-yolo-backend:v1.0.0
+    source: pull
 
-- name: Start MongoDB container
+- name: Create Node.js Backend Container
   docker_container:
-        name: "{{ mongodb_container_name }}"
-        image: mongo:latest
-        state: started
-        restart_policy: always
-        networks:
-          app-net: {}
+    name: leena-yolo-backend
+    image: shikul/leena-yolo-backend:v1.0.0
+    networks:
+      - name: app-net
+    ports:
+      - "5000:5000"
+    command: "npm start"
+  become: yes

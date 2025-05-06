@@ -4,4 +4,4 @@
   - name: Clone application code from GitHub
     git:
         repo: 'https://github.com/wanjikusys/yolo.git'
-        dest: /home/vagrant/Desktop/ip3/yolo
+        dest: /Desktop/ip3/yolo

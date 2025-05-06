@@ -11,4 +11,6 @@
      - role: docker
      - role: clone
      - role: mongodb
- 
+     - role: frontend
+     - role: backend
+     

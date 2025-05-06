@@ -1,3 +1,4 @@
-#SPDX-License-Identifier: MIT-0
 ---
-# vars file for backend
+ container_name: leena-yolo-backend
+ network: app-net
+ volume: app-mongo-data/app
