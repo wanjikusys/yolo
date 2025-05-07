@@ -1,4 +1,4 @@
 ---
- container_name: leena-yolo-backend
+ container_name: leena-yolo-client
  network: app-net
  volume: app-mongo-data/app
