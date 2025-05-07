@@ -1,11 +1,16 @@
 ---
- - name: Start Frontend container
-   docker_container:
-        name: "{{ frontend_container_name }}"
-        image: leena-yolo-client
-        state: started
-        restart_policy: always
-        networks:
-          - app-net
-        ports:
-          - "8080:8080"
+- name: Pull image from repository
+  docker_image:
+    name: shikul/leena-yolo-client:v1.0.0
+    source: pull
+
+- name: Create Node.js Backend Container
+  docker_container:
+    name: leena-yolo-client
+    image: shikul/leena-yolo-client:v1.0.0
+    networks:
+      - name: app-net
+    ports:
+      - "5000:5000"
+    command: "npm start"
+  become: yes

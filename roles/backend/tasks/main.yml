@@ -1,11 +1,16 @@
 ---
-- name: Start Backend container
+- name: Pull image from repository
+  docker_image:
+    name: shikul/leena-yolo-backend:v1.0.0
+    source: pull
+
+- name: Create Node.js Backend Container
   docker_container:
-        name: "{{ backend_container_name }}"
-        image: leena-backend-image
-        state: started
-        restart_policy: always
-        networks:
-          - app-net
-        ports:
-          - "5000:5000"
+    name: leena-yolo-backend
+    image: shikul/leena-yolo-backend:v1.0.0
+    networks:
+      - name: app-net
+    ports:
+      - "5000:5000"
+    command: "npm start"
+  become: yes

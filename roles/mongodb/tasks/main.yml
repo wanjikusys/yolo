@@ -1,16 +1,10 @@
+# tasks file for mongodb
 ---
-- name: Pull image from repository
-  docker_image:
-    name: shikul/leena-yolo-backend:v1.0.0
-    source: pull
-
-- name: Create Node.js Backend Container
-  docker_container:
-    name: leena-yolo-backend
-    image: shikul/leena-yolo-backend:v1.0.0
-    networks:
-      - name: app-net
+- name: Run MongoDB container
+  community.docker.docker_container:
+    name: mongodb
+    image: mongo:latest
+    state: started
+    restart_policy: always
     ports:
-      - "5000:5000"
-    command: "npm start"
-  become: yes
+      - "27017:27017"
