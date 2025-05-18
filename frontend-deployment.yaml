@@ -17,7 +17,7 @@ spec:
       - name: frontend
         image: shikul/leena-yolo-client:v1.0.0
         command: ["/bin/sh", "-c"]
-        args: ["while true; do sleep 3600; done"]  # Keep container running
+        args: ["while true; do sleep 3600; done"]
         ports:
         - containerPort: 8080
         env:
