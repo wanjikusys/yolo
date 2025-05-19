@@ -2,7 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: yolo-app-frontend
+  namespace: default
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: yolo-app-frontend
@@ -13,11 +15,13 @@ spec:
     spec:
       containers:
       - name: yolo-app-frontend
-        image: shikul/leena-yolo-client:v1.0.0/yolo-app-frontend:v1.1.0
+        image: shikul/leena-yolo-client:v1.0.0
+        ports:
+        - containerPort: 8080
         resources:
           limits:
-            memory: "128Mi"
             cpu: "500m"
-        ports:
-        - name: frontend-port
-          containerPort: 80
+            memory: "512Mi"
+          requests:
+            cpu: "100m"
+            memory: "128Mi"

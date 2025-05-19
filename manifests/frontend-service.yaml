@@ -2,10 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: yolo-app-frontend-svc
+  namespace: default
 spec:
   selector:
     app: yolo-app-frontend
-  type: LoadBalancer  
   ports:
-  - port: 80
-    targetPort: 80
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: LoadBalancer
